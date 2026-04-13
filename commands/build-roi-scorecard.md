@@ -106,7 +106,7 @@ Below the table, include a **Summary** paragraph that calls out:
 
 ### Write the scorecard artifact
 
-Read [`../skills/product-roadmaps/templates/roi-scorecard.md`](../skills/product-roadmaps/templates/roi-scorecard.md) and write a filled-in copy to `./artifacts/scorecard-YYYY-MM-DD.md` (use today's date; if the file already exists, append `-v2`, `-v3` suffixes). Populate `scored_on`, `strategic_goals` (OBJ-* IDs if a `roadmap.md` is present, otherwise the raw goal names), `customer_needs` (CN-* IDs and names), `items_scored` (theme IDs TH-00N when scoring themes, otherwise raw item names), and the full scoring table.
+Read [`${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/roi-scorecard.md`](${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/roi-scorecard.md) and write a filled-in copy to `./artifacts/scorecard-YYYY-MM-DD.md` (use today's date; if the file already exists, append `-v2`, `-v3` suffixes). Populate `scored_on`, `strategic_goals` (OBJ-* IDs if a `roadmap.md` is present, otherwise the raw goal names), `customer_needs` (CN-* IDs and names), `items_scored` (theme IDs TH-00N when scoring themes, otherwise raw item names), and the full scoring table.
 
 ### Update theme files with the ROI score
 

@@ -204,7 +204,7 @@ List any **roadmap anti-patterns** or **bad prioritization methods** observed in
 
 ## Artifact templates
 
-When the relaunch plan calls for rebuilding the roadmap, direct the user to the standard templates at [`../skills/product-roadmaps/templates/`](../skills/product-roadmaps/templates/):
+When the relaunch plan calls for rebuilding the roadmap, direct the user to the standard templates at [`${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/`](${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/):
 
 - `roadmap.md` — the index file with vision, objectives, disclaimer, and Now/Next/Later tables
 - `theme.md` — one-per-theme with customer need, linked objectives, evidence, and optional ROI score

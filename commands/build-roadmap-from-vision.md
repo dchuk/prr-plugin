@@ -179,8 +179,8 @@ Produce a structured roadmap draft containing all five primary components (`ch05
 
 Write the draft to disk in the user's current working directory using the plugin's templates:
 
-- Read [`../skills/product-roadmaps/templates/roadmap.md`](../skills/product-roadmaps/templates/roadmap.md) and write a filled-in copy to `./roadmap.md`. Populate `vision`, `objectives`, `disclaimer`, `prioritization_method`, `status: draft`, `last_reviewed` (today), and `refresh_cadence`.
-- Read [`../skills/product-roadmaps/templates/theme.md`](../skills/product-roadmaps/templates/theme.md) and write one file per theme to `./themes/<slug>.md`. Slug = kebab-case of the theme's "Ensure …" name. Populate `id` (TH-001, TH-002, …), `name`, `timeframe` (Now / Next / Later only), `customer_need`, `linked_objectives` (non-empty — every theme must link to at least one objective), `confidence` (integer 0–99, never 100), `created_on`, `last_updated`.
+- Read [`${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/roadmap.md`](${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/roadmap.md) and write a filled-in copy to `./roadmap.md`. Populate `vision`, `objectives`, `disclaimer`, `prioritization_method`, `status: draft`, `last_reviewed` (today), and `refresh_cadence`.
+- Read [`${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/theme.md`](${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/theme.md) and write one file per theme to `./themes/<slug>.md`. Slug = kebab-case of the theme's "Ensure …" name. Populate `id` (TH-001, TH-002, …), `name`, `timeframe` (Now / Next / Later only), `customer_need`, `linked_objectives` (non-empty — every theme must link to at least one objective), `confidence` (integer 0–99, never 100), `created_on`, `last_updated`.
 - Cross-link: the `## Themes — Now / Next / Later` tables in `roadmap.md` must link to each `themes/<slug>.md` file.
 
 If these files already exist, ask the user whether to overwrite, merge, or write to a different path.
