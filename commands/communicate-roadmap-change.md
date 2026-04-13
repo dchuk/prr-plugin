@@ -104,7 +104,7 @@ Output a short checklist the user should apply to the roadmap artifact before th
 
 ### 7. Write the change-communication artifact
 
-Read [`${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/change-communication.md`](${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/change-communication.md) and write a filled-in copy to `./artifacts/change-YYYY-MM-DD-<slug>.md` (slug = short kebab-case description of the change, e.g. `defer-reporting`, `pivot-to-enterprise`). Populate `change_date`, `change_depth` (small / broad / fundamental), `affected_themes` (theme IDs from `./themes/`), `audiences`, and all body sections drafted in steps 2–6.
+Read the change-communication template at !`echo ${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/change-communication.md` and write a filled-in copy to `./artifacts/change-YYYY-MM-DD-<slug>.md` (slug = short kebab-case description of the change, e.g. `defer-reporting`, `pivot-to-enterprise`). Populate `change_date`, `change_depth` (small / broad / fundamental), `affected_themes` (theme IDs from `./themes/`), `audiences`, and all body sections drafted in steps 2–6.
 
 Then update the affected files:
 

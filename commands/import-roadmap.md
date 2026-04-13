@@ -73,7 +73,7 @@ Do not guess on ambiguous items — it is better to ask than to invent a custome
 
 For every theme-equivalent item in the source:
 
-1. Read [`${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/theme.md`](${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/theme.md).
+1. Read the theme template at !`echo ${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/theme.md`.
 2. Write a filled-in copy to `./themes/<slug>.md`. Slug = kebab-case of the outcome-style name (e.g. `ensure-seamless-checkout`).
 3. Populate: `type: theme`, `managed_by: prr`, `id` (TH-001, TH-002, …), `name` in "Ensure … for …" form, `timeframe` (Now/Next/Later only), `customer_need`, `linked_objectives` (non-empty — ask if unclear), `confidence` (default 50 unless the source provides evidence), `source: import`, `created_on` (today), `last_updated` (today).
 4. Preserve source traceability in the body under a `## Source` section:
@@ -85,11 +85,11 @@ For every theme-equivalent item in the source:
    - Notes: <any context that doesn't fit the other fields>
    ```
 
-Then read [`${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/roadmap.md`](${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/roadmap.md) and write `./roadmap.md` with the extracted vision/objectives/disclaimer, `prioritization_method` set to whatever the source used (or `null` if unknown), and Now / Next / Later tables linking to each theme file.
+Then read the roadmap template at !`echo ${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/roadmap.md` and write `./roadmap.md` with the extracted vision/objectives/disclaimer, `prioritization_method` set to whatever the source used (or `null` if unknown), and Now / Next / Later tables linking to each theme file.
 
 ### 6. Produce an import report
 
-Read [`${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/roadmap.md`](${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/roadmap.md) as a reference for the conventions, then write a free-form markdown report at `./artifacts/import-YYYY-MM-DD.md` with these sections:
+Read the roadmap template at !`echo ${CLAUDE_PLUGIN_ROOT}/skills/product-roadmaps/templates/roadmap.md` as a reference for the conventions, then write a free-form markdown report at `./artifacts/import-YYYY-MM-DD.md` with these sections:
 
 - **Source** — file path, format, size
 - **Classification** — theme-based / feature-and-dates / mixed / skeletal
