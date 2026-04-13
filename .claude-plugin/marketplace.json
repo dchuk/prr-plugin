@@ -1,0 +1,14 @@
+{
+  "name": "prr-marketplace",
+  "owner": {
+    "name": "dchuk",
+    "email": "me@dchuk.com"
+  },
+  "plugins": [
+    {
+      "name": "prr",
+      "source": ".",
+      "description": "Strategic product roadmapping guidance based on Product Roadmaps Relaunched — shifting from feature-date lists to outcome-driven, theme-based roadmaps that communicate strategy and rally stakeholders."
+    }
+  ]
+}

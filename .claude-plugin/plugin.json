@@ -1,0 +1,20 @@
+{
+  "name": "prr",
+  "version": "0.1.0",
+  "description": "Strategic product roadmapping guidance based on Product Roadmaps Relaunched \u2014 shifting from feature-date lists to outcome-driven, theme-based roadmaps that communicate strategy and rally stakeholders.",
+  "author": {
+    "name": "dchuk",
+    "email": "me@dchuk.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "product-management",
+    "roadmapping",
+    "product-strategy",
+    "prioritization",
+    "stakeholder-alignment",
+    "okrs",
+    "themes",
+    "outcomes"
+  ]
+}
