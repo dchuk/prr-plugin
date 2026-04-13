@@ -1,6 +1,6 @@
 # prr — Product Roadmaps Relaunched
 
-A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin that turns *Product Roadmaps Relaunched* by C. Todd Lombardo into a working toolkit: a skill, seven slash commands, two subagents, and a reference tree you can cite when building, reviewing, or defending a product roadmap.
+A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin that turns *Product Roadmaps Relaunched* by C. Todd Lombardo into a working toolkit for product managers: a skill, eight slash commands, two subagents, five artifact templates, a validator hook, and a reference tree you can cite when building, reviewing, or defending a product roadmap.
 
 The plugin's point of view — taken directly from the book — is that a roadmap is a **strategic communication tool**, not a project plan. Use this plugin when you want to move from feature-and-date lists to **outcome-driven, theme-based roadmaps** that communicate strategy and rally stakeholders.
 
@@ -15,7 +15,7 @@ In Claude Code, add this repo as a plugin marketplace and install the plugin:
 /plugin install prr@prr-marketplace
 ```
 
-After install, the `product-roadmaps` skill is automatically available, the seven `/prr:*` commands are registered, and the two subagents can be invoked by name.
+After install, the `product-roadmaps` skill is automatically available, the eight `/prr:*` commands are registered, the two subagents can be invoked by name, and the validator hook is wired into `Write` / `Edit` / `MultiEdit`.
 
 To update later:
 
@@ -25,13 +25,80 @@ To update later:
 
 ---
 
+## Quick Start for Product Managers
+
+There are two ways to start using this plugin. Pick the one that matches where you are today.
+
+### Path A — Start a new roadmap from scratch
+
+Use this when you have no roadmap yet, or when your existing one is so broken that rebuilding is cleaner than converting.
+
+1. In Claude Code, open a directory where you want the roadmap to live (e.g. `~/work/acme-roadmap/`).
+2. Run:
+   ```
+   /prr:build-roadmap-from-vision
+   ```
+   Optionally pass your company vision as the argument.
+3. Claude walks you through the book's eight-step process — vision, business objectives (OKRs), customer needs, themes, prioritization, Now / Next / Later assignment, disclaimer, secondary components.
+4. Claude writes the following to your directory:
+   - `roadmap.md` — vision, OKRs, Now/Next/Later index, disclaimer
+   - `themes/<slug>.md` — one file per theme with linked objectives, customer need, confidence, evidence
+5. Invoke the `roadmap-reviewer` subagent to audit the draft before sharing it.
+
+### Path B — Import an existing roadmap
+
+Use this when you already have a roadmap somewhere — slides, a spreadsheet, Jira Product Discovery, Notion, Aha!, Productboard — and want to adopt the prr conventions without rebuilding from scratch.
+
+**Step 1: Export your current roadmap into a file Claude can read.**
+
+| If it lives in… | Export it as |
+|-----------------|--------------|
+| Jira Product Discovery | CSV or JSON from the ideas view |
+| Aha!, Productboard, Roadmunk | CSV |
+| Google Slides, PowerPoint, Keynote | PDF (File → Download → PDF) |
+| Notion or Confluence | Markdown or PDF |
+| Excel, Google Sheets, Numbers | CSV |
+| A brain-dump doc or email | Plain markdown / text |
+
+Save it anywhere in your project (e.g. `./imports/jpd-export.csv` or `./imports/roadmap-deck.pdf`).
+
+**Step 2: Run the import command.**
+
+```
+/prr:import-roadmap ./imports/roadmap-deck.pdf
+```
+
+Claude will:
+
+1. Read the source file (PDFs, CSVs, JSON, markdown all supported natively).
+2. Classify what you have — *theme-based*, *feature-and-dates*, *mixed*, or *skeletal*.
+3. Extract the five primary components (vision, objectives, themes, timeframes, disclaimer) and list what is missing.
+4. Ask you about any gaps — typically missing vision, missing objectives, calendar dates that need reframing into Now / Next / Later, or feature names that need transforming into outcome-style themes ("SSO" → "Ensure teams can onboard under enterprise security review").
+5. Write the converted files:
+   - `roadmap.md` + `themes/<slug>.md` in the prr format (each theme file keeps a `## Source` section linking back to the original Jira ID / slide number / row)
+   - `artifacts/import-YYYY-MM-DD.md` — an import report explaining every transformation, every gap filled, and every anti-pattern detected in the source
+
+**Step 3: Audit the result.**
+
+Invoke the `roadmap-reviewer` subagent. It will catch subtle anti-patterns that survived the conversion (e.g. a "theme" that is really a feature, a vision statement that is actually a mission statement).
+
+### What you get either way
+
+- **Structured markdown** you can keep in git, diff, and review — not trapped in a slide deck or a SaaS tool.
+- **Book-grounded frontmatter** that prevents the named anti-patterns: no calendar dates, no orphaned themes, no 100% confidence, disclaimer required. A validator hook enforces these on every file write — see [Enforcement via a validator hook](#enforcement-via-a-validator-hook).
+- **Commands for the rest of the lifecycle:** prioritize with `/prr:build-roi-scorecard`, handle incoming asks with `/prr:evaluate-special-request`, announce changes with `/prr:communicate-roadmap-change`, diagnose process issues with `/prr:assess-roadmap-health`, build buy-in with `/prr:run-shuttle-diplomacy`.
+
+---
+
 ## What's inside
 
 | Component | Count | Purpose |
 |-----------|-------|---------|
 | Skill | 1 (`product-roadmaps`) | Always-on guidance that routes Claude to the right reference, command, or agent for roadmap work |
-| Slash commands | 7 | Structured, step-by-step workflows for the most common roadmap tasks |
+| Slash commands | 8 | Structured, step-by-step workflows for the common roadmap tasks |
 | Subagents | 2 | Specialized reviewers that operate with narrow scope and their own system prompt |
+| Artifact templates | 5 | Standard markdown shapes for roadmap, theme, scorecard, change-comm, and special-request files |
+| Validator hook | 1 | `PostToolUse` hook that enforces frontmatter rules on every `Write`/`Edit` of a `managed_by: prr` file |
 | Reference files | 13 | Book-grounded material the skill loads on demand — frameworks, patterns, anti-patterns, glossary |
 
 ---
@@ -43,6 +110,7 @@ All commands are namespaced `/prr:*` and accept an optional argument (feature li
 | Command | Purpose |
 |---------|---------|
 | `/prr:build-roadmap-from-vision` | Construct a full roadmap skeleton from company vision down to themes, business objectives, Now/Next/Later timeframes, and a disclaimer — the five required primary components. |
+| `/prr:import-roadmap` | Convert an existing roadmap in any format (PDF, CSV, JSON, markdown) into the prr template format, with an import report showing transformations and anti-patterns found. |
 | `/prr:transform-features-to-themes` | Convert a list of feature requests or deliverables into outcome-oriented themes by uncovering the underlying customer need behind each item. |
 | `/prr:build-roi-scorecard` | Build a defensible ROI Scorecard ranking themes or features using **Value / Effort × Confidence** so prioritization isn't driven by gut or politics. |
 | `/prr:run-shuttle-diplomacy` | Plan and run one-on-one stakeholder meetings followed by a group alignment session to build buy-in before finalizing a roadmap. |
@@ -127,23 +195,17 @@ references/
 
 ---
 
-## Typical workflows
+## Lifecycle after the first roadmap exists
 
-**Starting a new roadmap**
-1. `/prr:build-roadmap-from-vision` to draft the skeleton.
-2. `/prr:transform-features-to-themes` on any feature lists handed to you.
-3. `/prr:build-roi-scorecard` to prioritize themes.
-4. `/prr:run-shuttle-diplomacy` to build buy-in.
-5. Invoke `roadmap-reviewer` before finalizing.
+Once `roadmap.md` and `themes/` are in place (via Path A or Path B), the rest of the commands cover day-to-day roadmap work:
 
-**Fixing an existing roadmap**
-1. `/prr:assess-roadmap-health` to decide Approach A vs. Approach B.
-2. Invoke `roadmap-relaunch-planner` to sequence the intervention.
-3. Use `roadmap-reviewer` to catch anti-patterns in the current artifact.
-
-**Handling disruption**
-- Incoming stakeholder demand → `/prr:evaluate-special-request`
-- Roadmap just changed → `/prr:communicate-roadmap-change`
+- **Prioritizing a backlog** → `/prr:build-roi-scorecard` (writes `artifacts/scorecard-YYYY-MM-DD.md` and updates each theme's `roi_score` frontmatter).
+- **Incoming sales or exec request** → `/prr:evaluate-special-request` (three qualifying questions + iron-triangle trade-off, writes `artifacts/request-YYYY-MM-DD-<slug>.md`).
+- **Roadmap changed and stakeholders need to know** → `/prr:communicate-roadmap-change` (audience-aware message for dev/exec/sales/customer, writes `artifacts/change-YYYY-MM-DD-<slug>.md`).
+- **Process feels broken** → `/prr:assess-roadmap-health` (14-question health check, recommends course correction vs. full relaunch).
+- **Need stakeholder buy-in before a review** → `/prr:run-shuttle-diplomacy` (one-on-one plan + group alignment session).
+- **Want a rigorous audit** → invoke the `roadmap-reviewer` subagent — it reads files in structured mode when they carry `managed_by: prr` frontmatter.
+- **Planning a full relaunch** → invoke the `roadmap-relaunch-planner` subagent after running the health assessment.
 
 ---
 

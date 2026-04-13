@@ -71,6 +71,7 @@ Eight steps from inputs to a living roadmap. Follow this sequence when starting 
 
 - **Understand what a product roadmap is (and is not)** → [roadmap-definition](references/core/roadmap-definition.md)
 - **Build a roadmap from your company vision down to themes** → [`/build-roadmap-from-vision`](../../commands/build-roadmap-from-vision.md)
+- **Convert an existing roadmap (Jira, Aha!, slides, spreadsheet) into this format** → [`/import-roadmap`](../../commands/import-roadmap.md)
 - **Transform a feature list into outcome-oriented themes** → [`/transform-features-to-themes`](../../commands/transform-features-to-themes.md)
 - **Prioritize themes using a scored framework** → [`/build-roi-scorecard`](../../commands/build-roi-scorecard.md) or [prioritization-frameworks](references/patterns/prioritization-frameworks.md)
 - **Align stakeholders and get buy-in** → [`/run-shuttle-diplomacy`](../../commands/run-shuttle-diplomacy.md) or [alignment-and-buyin](references/patterns/alignment-and-buyin.md)
@@ -87,6 +88,7 @@ Eight steps from inputs to a living roadmap. Follow this sequence when starting 
 | Command | What it does |
 |---------|-------------|
 | `/build-roadmap-from-vision` | Walk from company vision → product vision → strategy → OKRs → themes to create a roadmap skeleton |
+| `/import-roadmap` | Convert an existing roadmap (PDF, CSV, JSON, markdown) into the prr plugin format with an import report |
 | `/transform-features-to-themes` | Convert a feature list into outcome-oriented themes by asking "Why does this matter?" |
 | `/build-roi-scorecard` | Build a weighted ROI scoring model for prioritizing themes |
 | `/run-shuttle-diplomacy` | Generate a shuttle diplomacy canvas and stakeholder engagement plan |
@@ -94,7 +96,7 @@ Eight steps from inputs to a living roadmap. Follow this sequence when starting 
 | `/assess-roadmap-health` | Run the 14-question Roadmap Health Assessment (scored 0–2, max 22 points) |
 | `/communicate-roadmap-change` | Draft a structured change communication covering why, what, and what's next |
 
-Full command details: [`build-roadmap-from-vision`](../../commands/build-roadmap-from-vision.md) · [`transform-features-to-themes`](../../commands/transform-features-to-themes.md) · [`build-roi-scorecard`](../../commands/build-roi-scorecard.md) · [`run-shuttle-diplomacy`](../../commands/run-shuttle-diplomacy.md) · [`evaluate-special-request`](../../commands/evaluate-special-request.md) · [`assess-roadmap-health`](../../commands/assess-roadmap-health.md) · [`communicate-roadmap-change`](../../commands/communicate-roadmap-change.md)
+Full command details: [`build-roadmap-from-vision`](../../commands/build-roadmap-from-vision.md) · [`import-roadmap`](../../commands/import-roadmap.md) · [`transform-features-to-themes`](../../commands/transform-features-to-themes.md) · [`build-roi-scorecard`](../../commands/build-roi-scorecard.md) · [`run-shuttle-diplomacy`](../../commands/run-shuttle-diplomacy.md) · [`evaluate-special-request`](../../commands/evaluate-special-request.md) · [`assess-roadmap-health`](../../commands/assess-roadmap-health.md) · [`communicate-roadmap-change`](../../commands/communicate-roadmap-change.md)
 
 ---
 
