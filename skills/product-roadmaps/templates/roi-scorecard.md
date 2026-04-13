@@ -1,5 +1,6 @@
 ---
 type: roi-scorecard
+managed_by: prr                     # Required. Identifies this file to the prr plugin's validator hook.
 scored_on: YYYY-MM-DD
 scored_by: <author>
 formula: "(Value / Effort) × Confidence"

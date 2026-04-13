@@ -1,5 +1,6 @@
 ---
 type: theme
+managed_by: prr                     # Required. Identifies this file to the prr plugin's validator hook.
 id: TH-001
 name: "Ensure <result> for <stakeholder>"
 timeframe: Now                      # Now | Next | Later  (NEVER a calendar date)

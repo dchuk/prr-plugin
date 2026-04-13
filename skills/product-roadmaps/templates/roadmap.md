@@ -1,5 +1,6 @@
 ---
 type: roadmap
+managed_by: prr                    # Required. Identifies this file to the prr plugin's validator hook.
 product: <product name>
 version: 0.1.0
 status: draft                      # draft | active | archived

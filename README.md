@@ -89,6 +89,17 @@ Default on-disk layout in a user project:
 
 The frontmatter enforces book-grounded constraints structurally: `timeframe` is restricted to `Now | Next | Later` (no dates), `confidence` is an integer 0–99 (never 100), `linked_objectives` is required and non-empty (no orphaned themes), `disclaimer` is required on the roadmap. Every file carries a `type:` discriminator so agents can filter artifacts with a single grep.
 
+### Enforcement via a validator hook
+
+The plugin ships a `PostToolUse` hook (`hooks/validate-artifact.py`) that runs after every `Write` / `Edit` / `MultiEdit`. The hook:
+
+- **Only inspects files that declare `managed_by: prr`** in their YAML frontmatter — your existing `roadmap.md` or `themes/*.md` without that marker are never touched.
+- Validates type-specific rules (required fields, enum values, integer ranges) against the book's prescriptions.
+- On failure, exits with code 2 and prints actionable errors to stderr; Claude sees the message and self-corrects in the same conversation.
+- Has zero third-party dependencies — pure Python stdlib, uses only `python3` which ships with macOS and Linux.
+
+To opt out on a specific file, simply omit `managed_by: prr` from its frontmatter. To disable the hook globally, remove it from `~/.claude/settings.json` after install.
+
 ## Skill and reference tree
 
 The `product-roadmaps` skill is the plugin's entry point. It registers the routing logic (core process, pattern catalog, anti-pattern index, command/agent map) and loads reference files on demand. The tree under `skills/product-roadmaps/references/`:

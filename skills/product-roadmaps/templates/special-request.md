@@ -1,5 +1,6 @@
 ---
 type: special-request-evaluation
+managed_by: prr                     # Required. Identifies this file to the prr plugin's validator hook.
 request_date: YYYY-MM-DD
 requester: <name / role / account>
 deal_size: null                     # Optional. USD or relative ("strategic", "SMB")

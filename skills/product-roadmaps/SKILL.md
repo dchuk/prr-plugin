@@ -168,11 +168,17 @@ The plugin ships five markdown templates that encode the book's data model as YA
 
 ### Structural constraints baked into the templates
 
-The frontmatter enforces book-grounded rules so reviewers can verify them mechanically:
+Every template carries `managed_by: prr` in its frontmatter — this is the discriminator the plugin uses to distinguish its own artifacts from any other `roadmap.md` or `themes/*.md` a user might already have in their project. The plugin's `PostToolUse` validator hook **only inspects files with `managed_by: prr`** and silently ignores everything else.
 
+The frontmatter enforces book-grounded rules so reviewers (and the hook) can verify them mechanically:
+
+- **`managed_by: prr`** — required on every template; identifies the file as plugin-managed.
 - **No ship dates** — `timeframe` is an enum of `Now | Next | Later` only.
 - **No orphaned themes** — `linked_objectives` is required and must be non-empty.
 - **No overconfidence** — `confidence` is an integer 0–99; 100 is prohibited.
 - **Disclaimer required** — roadmap frontmatter has a required `disclaimer` field.
+- **Vision and objectives required** — a roadmap with neither is a "Roadmap Without Strategic Context" anti-pattern.
 - **Prioritization method declared** — roadmap frontmatter names the method used (`roi-scorecard`, `dfv`, `kano`, `moscow`, `critical-path`).
 - **`type:` discriminator** on every file — lets agents filter artifacts with a single grep.
+
+The validator hook (`hooks/validate-artifact.py`) runs on every `Write`, `Edit`, and `MultiEdit` and reports violations back to Claude via stderr + exit code 2, so the model self-corrects in-session. User files without `managed_by: prr` are never touched.

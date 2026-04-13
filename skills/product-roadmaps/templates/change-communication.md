@@ -1,5 +1,6 @@
 ---
 type: change-communication
+managed_by: prr                     # Required. Identifies this file to the prr plugin's validator hook.
 change_date: YYYY-MM-DD
 change_depth: small                 # small | broad | fundamental
 affected_themes: [TH-001]           # Theme IDs touched by this change
