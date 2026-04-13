@@ -137,3 +137,42 @@ Full command details: [`build-roadmap-from-vision`](../../commands/build-roadmap
 | [keeping-roadmap-fresh](references/topics/keeping-roadmap-fresh.md) | Roadmap evolution and maintenance: punctuated equilibrium, the iron triangle, and cadence for updates |
 | [relaunch-process](references/topics/relaunch-process.md) | Relaunching roadmaps in your organization: the 14-question Roadmap Health Assessment and improvement playbook |
 | [glossary](references/topics/glossary.md) | Consolidated definitions of key roadmapping terms used across the book |
+
+---
+
+## Artifacts and Templates
+
+The plugin ships five markdown templates that encode the book's data model as YAML frontmatter plus prose. Commands read these templates and write filled-in copies into the user's current working directory. Agents (especially [roadmap-reviewer](../../agents/roadmap-reviewer.md)) audit the resulting files against the 14-question Health Assessment mapping.
+
+| Template | Purpose | Written to |
+|----------|---------|------------|
+| [`templates/roadmap.md`](templates/roadmap.md) | Roadmap index: vision, objectives, disclaimer, Now/Next/Later tables linking to theme files | `./roadmap.md` |
+| [`templates/theme.md`](templates/theme.md) | One theme per file: customer need, linked objectives, timeframe, confidence, evidence, subthemes, optional ROI score | `./themes/<slug>.md` |
+| [`templates/roi-scorecard.md`](templates/roi-scorecard.md) | Prioritization scorecard using (Value / Effort) × Confidence | `./artifacts/scorecard-YYYY-MM-DD.md` |
+| [`templates/change-communication.md`](templates/change-communication.md) | Audience-aware roadmap-change announcement with mandatory "Why" section | `./artifacts/change-YYYY-MM-DD-<slug>.md` |
+| [`templates/special-request.md`](templates/special-request.md) | Three-qualifying-questions evaluation of an ad-hoc stakeholder request, with iron-triangle trade-off | `./artifacts/request-YYYY-MM-DD-<slug>.md` |
+
+### Default project layout
+
+```
+<user project>/
+├── roadmap.md
+├── themes/
+│   ├── ensure-seamless-checkout.md
+│   └── ensure-faster-onboarding.md
+└── artifacts/
+    ├── scorecard-2026-04-13.md
+    ├── change-2026-04-20-defer-reporting.md
+    └── request-2026-04-22-acme-sso.md
+```
+
+### Structural constraints baked into the templates
+
+The frontmatter enforces book-grounded rules so reviewers can verify them mechanically:
+
+- **No ship dates** — `timeframe` is an enum of `Now | Next | Later` only.
+- **No orphaned themes** — `linked_objectives` is required and must be non-empty.
+- **No overconfidence** — `confidence` is an integer 0–99; 100 is prohibited.
+- **Disclaimer required** — roadmap frontmatter has a required `disclaimer` field.
+- **Prioritization method declared** — roadmap frontmatter names the method used (`roi-scorecard`, `dfv`, `kano`, `moscow`, `critical-path`).
+- **`type:` discriminator** on every file — lets agents filter artifacts with a single grep.

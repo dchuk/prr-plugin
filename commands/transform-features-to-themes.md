@@ -51,6 +51,10 @@ Convert a list of feature requests, stakeholder demands, or concrete deliverable
 
    Fill every row. For any theme that could not be linked to an objective, set Action to "Review with team — no objective link found".
 
+8. **Write theme files to disk.** For each theme with at least one objective link, read [`../skills/product-roadmaps/templates/theme.md`](../skills/product-roadmaps/templates/theme.md) and write a filled-in copy to `./themes/<slug>.md` (slug = kebab-case of the "Ensure …" name). If `./roadmap.md` already exists, read it to determine the next available `id` (TH-00N) and to sync the `linked_objectives` IDs with the roadmap's objectives. Populate `name`, `timeframe` (Now / Next / Later — ask the user if unclear), `customer_need`, `linked_objectives`, `confidence` (default 50 when unknown), `source`, `created_on`, `last_updated`. Paste the job/user story into the `## Evidence` section. If a theme file with that slug already exists, merge rather than overwrite — append to the `## Change log` and update `last_updated`.
+
+9. **Update the roadmap index.** If `./roadmap.md` exists, add each new theme to the appropriate `## Themes — Now / Next / Later` table with a link to `themes/<slug>.md`. If it does not exist, point the user at `/prr:build-roadmap-from-vision` to bootstrap it.
+
 ## Verify
 
 - Every row in the output table has a theme statement in "Ensure [result] for [stakeholder]" format.

@@ -61,6 +61,34 @@ Invoke these via Claude Code's agent system when you want a narrower, more rigor
 
 ---
 
+## Artifacts and templates
+
+Every artifact the plugin produces has a standard markdown shape with YAML frontmatter, so commands can read/write each other's output and the `roadmap-reviewer` agent can audit it mechanically.
+
+| Template | Purpose | Default output path |
+|----------|---------|---------------------|
+| [`skills/product-roadmaps/templates/roadmap.md`](skills/product-roadmaps/templates/roadmap.md) | The roadmap index — vision, objectives, disclaimer, Now/Next/Later tables | `./roadmap.md` |
+| [`skills/product-roadmaps/templates/theme.md`](skills/product-roadmaps/templates/theme.md) | One file per theme with customer need, linked objectives, evidence, subthemes, optional ROI score | `./themes/<slug>.md` |
+| [`skills/product-roadmaps/templates/roi-scorecard.md`](skills/product-roadmaps/templates/roi-scorecard.md) | (Value / Effort) × Confidence prioritization, written by `/prr:build-roi-scorecard` | `./artifacts/scorecard-YYYY-MM-DD.md` |
+| [`skills/product-roadmaps/templates/change-communication.md`](skills/product-roadmaps/templates/change-communication.md) | Audience-aware change announcement written by `/prr:communicate-roadmap-change` | `./artifacts/change-YYYY-MM-DD-<slug>.md` |
+| [`skills/product-roadmaps/templates/special-request.md`](skills/product-roadmaps/templates/special-request.md) | Three-qualifying-questions evaluation written by `/prr:evaluate-special-request` | `./artifacts/request-YYYY-MM-DD-<slug>.md` |
+
+Default on-disk layout in a user project:
+
+```
+<your project>/
+├── roadmap.md
+├── themes/
+│   ├── ensure-seamless-checkout.md
+│   └── ensure-faster-onboarding.md
+└── artifacts/
+    ├── scorecard-2026-04-13.md
+    ├── change-2026-04-20-defer-reporting.md
+    └── request-2026-04-22-acme-sso.md
+```
+
+The frontmatter enforces book-grounded constraints structurally: `timeframe` is restricted to `Now | Next | Later` (no dates), `confidence` is an integer 0–99 (never 100), `linked_objectives` is required and non-empty (no orphaned themes), `disclaimer` is required on the roadmap. Every file carries a `type:` discriminator so agents can filter artifacts with a single grep.
+
 ## Skill and reference tree
 
 The `product-roadmaps` skill is the plugin's entry point. It registers the routing logic (core process, pattern catalog, anti-pattern index, command/agent map) and loads reference files on demand. The tree under `skills/product-roadmaps/references/`:

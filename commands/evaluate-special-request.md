@@ -58,7 +58,9 @@ argument-hint: "[request description or feature name]"
    - **Iron triangle trade-off** (if accepted): which variable(s) are being compromised and how
    - **Recommended next action:** accept with trade-off, defer to next roadmap review, or decline
 
-8. **Flag stakeholder communication.** Remind the user that the decision and trade-offs must be communicated to all relevant stakeholders. If the request is accepted and displaces planned work, point them to [communicate-roadmap-change.md](communicate-roadmap-change.md) to draft that update. If declining, suggest a brief stakeholder note explaining the three-question outcome.
+8. **Write the evaluation artifact.** Read [`../skills/product-roadmaps/templates/special-request.md`](../skills/product-roadmaps/templates/special-request.md) and write a filled-in copy to `./artifacts/request-YYYY-MM-DD-<slug>.md` (slug = kebab-case of the request's short title, e.g. `acme-sso`). Populate `request_date`, `requester`, `deal_size` (if disclosed), `verdict` (now / next / later / decline), `iron_triangle_give` (the variable chosen in step 6, or null if declined), `linked_theme` (existing theme ID if mapped, otherwise null), and all body sections produced in steps 1–7.
+
+9. **Flag stakeholder communication.** Remind the user that the decision and trade-offs must be communicated to all relevant stakeholders. If the request is accepted and displaces planned work, point them to [communicate-roadmap-change.md](communicate-roadmap-change.md) to draft that update — the change-communication should reference this evaluation artifact by path. If declining, suggest a brief stakeholder note explaining the three-question outcome.
 
 ---
 

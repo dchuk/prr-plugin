@@ -102,7 +102,16 @@ Output a short checklist the user should apply to the roadmap artifact before th
 
 ---
 
-### 7. Plan socialization
+### 7. Write the change-communication artifact
+
+Read [`../skills/product-roadmaps/templates/change-communication.md`](../skills/product-roadmaps/templates/change-communication.md) and write a filled-in copy to `./artifacts/change-YYYY-MM-DD-<slug>.md` (slug = short kebab-case description of the change, e.g. `defer-reporting`, `pivot-to-enterprise`). Populate `change_date`, `change_depth` (small / broad / fundamental), `affected_themes` (theme IDs from `./themes/`), `audiences`, and all body sections drafted in steps 2–6.
+
+Then update the affected files:
+
+- For each theme in `affected_themes`, use Edit to update the theme file's `timeframe`, `confidence`, and `last_updated` frontmatter, and append a line to its `## Change log`: `- YYYY-MM-DD — <what changed> (see artifacts/change-YYYY-MM-DD-<slug>.md).`
+- If `./roadmap.md` exists, update its Now/Next/Later tables to reflect moves, bump `last_reviewed`, and append to its `## Change log`.
+
+### 8. Plan socialization
 
 Remind the user of the core rule: `ch13.rule.socialize-change-like-new-roadmap` — **socialize roadmap changes the same way you would socialize a new roadmap created from scratch**, except for minor changes (small scope or date adjustments) that only affect the release or project plan.
 

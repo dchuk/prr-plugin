@@ -104,6 +104,28 @@ Below the table, include a **Summary** paragraph that calls out:
 - Any items where low confidence materially suppressed an otherwise high Value/Effort ratio (flag these as worth de-risking)
 - Any dependency chains from the Notes column that affect sequencing
 
+### Write the scorecard artifact
+
+Read [`../skills/product-roadmaps/templates/roi-scorecard.md`](../skills/product-roadmaps/templates/roi-scorecard.md) and write a filled-in copy to `./artifacts/scorecard-YYYY-MM-DD.md` (use today's date; if the file already exists, append `-v2`, `-v3` suffixes). Populate `scored_on`, `strategic_goals` (OBJ-* IDs if a `roadmap.md` is present, otherwise the raw goal names), `customer_needs` (CN-* IDs and names), `items_scored` (theme IDs TH-00N when scoring themes, otherwise raw item names), and the full scoring table.
+
+### Update theme files with the ROI score
+
+For each item that corresponds to an existing theme file at `./themes/<slug>.md`, use Edit to populate the `roi_score:` block in its frontmatter:
+
+```yaml
+roi_score:
+  value: <sum of CN+OG columns>
+  effort: <T-shirt letter>
+  effort_number: <1–5>
+  confidence: <0.0–1.0 decimal>
+  priority_score: <value / effort × confidence>
+  scored_on: YYYY-MM-DD
+```
+
+Also update `last_updated` to today's date and append a line to the theme's `## Change log`: `- YYYY-MM-DD — Scored via ROI scorecard: priority <score>.`
+
+If any item in the scorecard has no corresponding theme file, flag it in the summary — it likely needs `/prr:transform-features-to-themes` first.
+
 ---
 
 ## Notes

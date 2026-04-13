@@ -199,3 +199,15 @@ List any **roadmap anti-patterns** or **bad prioritization methods** observed in
 ### 📅 Recommended Review Cadence
 
 [Frequency matched to business velocity and roadmap time scale, with rationale]
+
+---
+
+## Artifact templates
+
+When the relaunch plan calls for rebuilding the roadmap, direct the user to the standard templates at [`../skills/product-roadmaps/templates/`](../skills/product-roadmaps/templates/):
+
+- `roadmap.md` — the index file with vision, objectives, disclaimer, and Now/Next/Later tables
+- `theme.md` — one-per-theme with customer need, linked objectives, evidence, and optional ROI score
+- `roi-scorecard.md`, `change-communication.md`, `special-request.md` — artifacts produced by the relevant slash commands
+
+A relaunched roadmap should land in the user's project at `./roadmap.md` + `./themes/<slug>.md` so [`roadmap-reviewer`](roadmap-reviewer.md) can audit it in structured mode afterward.
